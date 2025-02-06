@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Development Quiz</title>
+    <title>foreign Music Quiz</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Rajdhani:wght@600&display=swap');
 
@@ -111,27 +111,9 @@
             line-height: 35px;
             text-shadow: var(--glow) #00ffff;
         }
-        #next-button {
-            display: none;
-            padding: 15px 30px;
-            font-size: 1.3em;
-            background: linear-gradient(135deg, #00509E, #00d4ff);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            margin-top: 25px;
-            box-shadow: var(--glow) #00d4ff;
-            transition: 0.3s;
-            animation: pulse 1.5s infinite;
-        }
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
-        }
-        #next-button:hover {
-            transform: scale(1.1);
-            box-shadow: var(--glow) #00d4ff, 0 0 30px #00d4ff;
         }
         #score-section {
             display: none;
@@ -191,15 +173,15 @@
         </style>
 </head>
 <body>
-    <h1>Web Development Quiz</h1>
+    <h1>Foreign Music Quiz</h1>
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
-        <div class="progress-text" id="progress-text">1/5</div>
+        <div class="progress-text" id="progress-text"></div>
     </div>
     <div id="quiz-container">
         <p class="question" id="question">Loading...</p>
         <div class="options" id="options"></div>
-        <button id="next-button" onclick="nextQuestion()">Next</button>
+        <button id="next-button" onclick="nextQuestion()"></button>
     </div>
     <div id="score-section"></div>
     <button id="restart-button" onclick="restartQuiz()">Restart Quiz</button>
@@ -207,7 +189,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
         </svg>
-        Back
+        Quit
     </a>
     <script>
         const questions = [
@@ -242,6 +224,17 @@
         function checkAnswer(button, selectedAnswer, correctAnswer) {
             const nextButton = document.getElementById("next-button");
             const optionsButtons = document.querySelectorAll(".options button");
+            setTimeout(nextQuestion, 1000);
+
+            if (selectedAnswer === correctAnswer) {
+    button.classList.add("correct");
+} else {
+    button.classList.add("wrong");
+    optionsButtons.forEach(btn => { 
+        if (btn.innerText === correctAnswer) btn.classList.add("correct"); 
+    });
+}
+optionsButtons.forEach(btn => btn.disabled = true);
 
             if (selectedAnswer === correctAnswer) {
                 button.classList.add("correct");
