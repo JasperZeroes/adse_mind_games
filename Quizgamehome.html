@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADSE Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ffaa00, #180202);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            color: #080602;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            font-size: 1.2em;
+            color: #333;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #ffaa00;
+            color: white;
+            font-size: 1.2em;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background-color: #ffaa00;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome To ADSE Quiz Game</h1>
+    <p>Are you ready to test your knowledge?</p>
+    <button id="Game" onclick="window.location.href='game1.html'">Play Game <span class="arrow"></span></button>
+</body>
+</html>
