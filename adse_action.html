@@ -179,7 +179,34 @@
                 width: 90%;
             }
         }
-
+        .back-button {
+          position: absolute;
+          top: 25px;
+          left: 25px;
+          display: flex;
+          align-items: center;
+          padding: 12px 25px;
+          font-size: 1.3em;
+          font-weight: bold;
+          color: white;
+          background: linear-gradient(to right, #00509E, #00d4ff);
+          border: none;
+          border-radius: 10px;
+          text-decoration: none;
+          cursor: pointer;
+          transition: transform 0.2s, box-shadow 0.2s;
+          box-shadow: var(--glow) #00d4ff;
+      }
+      .back-button:hover {
+          transform: scale(1.1);
+          box-shadow: var(--glow) #00d4ff, 0 0 30px #00d4ff;
+      }
+      .back-button svg {
+          margin-right: 10px;
+          fill: white;
+          width: 20px;
+          height: 20px;
+      }
         footer {
             position: relative;
             margin-top: 30px;
@@ -221,7 +248,11 @@
     <footer>
         <p>Get ready for a wild ride with action-packed questions!</p>
     </footer>
-
+    <a href="adse_movies_homepage.html" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
+        </svg>
+        Quit
     <script>
         // Shuffle function for randomizing questions
         function shuffle(array) {

@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADSE Quiz Game</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Rajdhani:wght@600&display=swap');
+        
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #ffaa00, #180202);
+            font-family: 'Orbitron', sans-serif;
+            background: radial-gradient(circle, #0d1b2a, #1b263b);
             text-align: center;
             margin: 0;
             padding: 0;
@@ -16,36 +18,59 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-        }
-        h1 {
-            color: rgb(71, 75, 105);
-            font-size: 3.5em;
-        }
-        p {
-            font-size: 1.2em;
-            color: #333;
-            margin: 10px 0;
-        }
-        button {
-            background-color: #ffaa00;
             color: white;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            text-shadow: 0 0 15px #ffcc00, 0 0 30px #ffcc00;
+            animation: glow-pulse 2s infinite alternate;
+        }
+        
+        @keyframes glow-pulse {
+            0% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00; }
+            100% { text-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00; }
+        }
+
+        .container {
+            max-width: 80%;
+        }
+
+        p {
+            font-size: 1.3em;
+            margin: 20px 0;
+            color: #dddddd;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #ffcc00;
             font-size: 1.2em;
-            padding: 15px 30px;
+        }
+
+        .play-button {
+            background: linear-gradient(135deg, #ffcc00, #ff8800);
+            color: black;
+            font-size: 1.5em;
+            padding: 15px 40px;
             border: none;
             border-radius: 10px;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 15px #ff8800;
         }
-        button:hover {
-            background-color: #ffaa00;
-            transform: scale(1.05);
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #ffcc00, 0 0 50px #ff8800;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome To ADSE Quiz Game</h1>
-    <p>Are you ready to test your knowledge?</p>
-    <button id="Game" onclick="window.location.href='game1.html'">Play Game <span class="arrow"></span></button>
+    <div class="container">
+        <h1>Welcome to ADSE Quiz Game</h1>
+        <p>Embark on an exciting journey to test your knowledge in various categories!</p>
+        <p class="quote">"Four months ago, this was just an idea. Now, it’s a reality—proof that learning at Aptech transforms ideas into powerful skills!"</p>
+        <button class="play-button" onclick="window.location.href='game1.html'">Play Now</button>
+    </div>
 </body>
 </html>
