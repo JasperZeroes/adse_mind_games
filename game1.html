@@ -53,28 +53,30 @@
             margin-top: 20px;
             }
 
-.category {
+            .category-container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Push text to the bottom */
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-    padding: 20px;
-    cursor: pointer;
-    box-shadow: 0 0 15px var(--neon-text);
-    height: 200px; /* Set a fixed height */
-    width: 80%;
+    align-items: center; /* Center the text under the image */
     text-align: center;
 }
 
+.category {
+    width: 70%; /* Adjust as needed */
+    height: 80%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--neon-text);
+    cursor: pointer;
+}
+
 .category-name {
+    margin-top: 10px; /* Adds space between image and text */
     font-size: 1.2em;
     color: white;
     font-weight: bold;
-    margin-top: 10px; /* Adds space between the image and the text */
 }
+
 
 
       .back-button {
@@ -105,18 +107,22 @@
 <body>
     <h1>Select a Category</h1>
     <div class="matrix">
-        <div class="category" style="background-image: url('football.jpg');" onclick="location.href='index.html'">
+        <div class="category-container">
+            <div class="category" style="background-image: url('football.jpg');" onclick="location.href='index.html'"></div>
             <div class="category-name">Football</div>
         </div>
-        <div class="category" style="background-image: url('aot\ pic.jpg');" onclick="location.href='adse_movie_index.html'">
+        <div class="category-container">
+            <div class="category" style="background-image: url('aot pic.jpg');" onclick="location.href='adse_movie_index.html'"></div>
             <div class="category-name">Movies</div>
         </div>
-        <div class="category" style="background-image: url('music\ image.jpg');" onclick="location.href='Music.html'">
+        <div class="category-container">
+            <div class="category" style="background-image: url('music image.jpg');" onclick="location.href='Music.html'"></div>
             <div class="category-name">Music</div>
         </div>
-        <div class="category" style="background-image: url('Tech\ image.jpg');" onclick="location.href='technology.html'">
+        <div class="category-container">
+            <div class="category" style="background-image: url('Tech image.jpg');" onclick="location.href='technology.html'"></div>
             <div class="category-name">Technology</div>
-        </div>
+        </div>        
     </div>
 
     <a href="Quizgamehome.html" class="back-button">
