@@ -11,6 +11,7 @@
             --primary-bg: linear-gradient(135deg, #000000, #ffcc00);
             --btn-bg: linear-gradient(135deg, #ffcc00, #ff0000);
             --glow-color: rgba(255, 204, 0, 0.8);
+            --back-btn-color: #00eaff;
         }
         body {
             font-family: 'Orbitron', sans-serif;
@@ -98,9 +99,59 @@
             75% { opacity: 1; transform: translate(-50%, -50%); }
             100% { opacity: 0; transform: translate(-50%, -60%); }
         }
+
+        /* Back button styling */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--back-btn-color), #006d99);
+            color: black;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 0 20px var(--back-btn-color);
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #006d99, var(--back-btn-color));
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--back-btn-color);
+        }
+        body {
+            font-size: 18px;
+        }
+
+        .container {
+            font-size: 1.2em;
+        }
+
+        h1, h3 {
+            font-size: 1.5em;
+        }
+
+        .btn {
+            font-size: 1.1em;
+        }
+
+        .back-btn {
+            font-size: 1em;
+        }
+
+        .congrats {
+            font-size: 1.3em;
+        }
+
+        
     </style>
 </head>
 <body>
+    <a href="index.html" class="back-btn">⬅ Back</a>
+
     <div class="container">
         <h1>Easy Quiz ⚽</h1>
         <div class="progress-bar">

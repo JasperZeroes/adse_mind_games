@@ -11,6 +11,8 @@
             --primary-bg: linear-gradient(135deg, #000000, #ffcc00);
             --btn-bg: linear-gradient(135deg, #ffcc00, #ff0000);
             --glow-color: rgba(255, 204, 0, 0.8);
+            --back-btn-bg: linear-gradient(135deg, #00eaff, #0066cc);
+            --back-btn-glow: rgba(0, 234, 255, 0.8);
         }
         body {
             font-family: 'Orbitron', sans-serif;
@@ -98,9 +100,58 @@
             75% { opacity: 1; transform: translate(-50%, -50%); }
             100% { opacity: 0; transform: translate(-50%, -60%); }
         }
+
+        /* Sci-fi blue back button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--back-btn-bg);
+            color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 8px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px var(--back-btn-glow);
+            transition: all 0.3s ease-in-out;
+            z-index: 10;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #0066cc, #00eaff);
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--back-btn-glow);
+        }
+        body {
+            font-size: 18px;
+        }
+
+        .container {
+            font-size: 1.2em;
+        }
+
+        h1, h3 {
+            font-size: 1.5em;
+        }
+
+        .btn {
+            font-size: 1.1em;
+        }
+
+        .back-btn {
+            font-size: 1em;
+        }
+
+        .congrats {
+            font-size: 1.3em;
+        }
+
     </style>
 </head>
 <body>
+    <a href="index.html" class="back-btn">⬅ Back</a>
+
     <div class="container">
         <h1>Medium Quiz ⚽</h1>
         <div class="progress-bar">
@@ -118,6 +169,7 @@
         </div>
     </div>
     <div class="congrats" id="congrats">🎉 Congratulations! You won! 🚀</div>
+
     <script>
         const questions = [
             { q: "Who is the coach of Manchester United?", options: ["Ruben Amorim", "Ten Hag", "Jose Mourinho", "Michael Carrick"], answer: "Ruben Amorim" },
