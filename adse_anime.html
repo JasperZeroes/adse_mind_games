@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime Quiz - Dark Theme</title>
     <style>
+        /* Global Styles */
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #1a237e, #0d47a1);
@@ -26,9 +27,13 @@
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-family: 'Impact', sans-serif;
+            font-size: 60px;
             color: #66ccff;
+            text-align: center;
+            margin-top: 20px;
             text-shadow: 0px 0px 15px #66ccff, 0px 0px 30px #fff;
+            letter-spacing: 5px;
             text-transform: uppercase;
             animation: glowEffect 1.5s infinite alternate;
         }
@@ -38,127 +43,242 @@
             100% { text-shadow: 0 0 30px #66ccff, 0 0 60px #fff; }
         }
 
-        .quiz-container {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
+        .quiz-container, .result-container {
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 25px;
+            width: 400px;
             text-align: center;
-            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .question {
-            font-size: 1.2rem;
+            font-size: 20px;
             margin-bottom: 20px;
             color: #bbdefb;
+            text-align: left;
+            padding: 10px;
+            background: linear-gradient(to right, #0d47a1, #1976d2);
+            border-radius: 10px;
+            text-shadow: 2px 2px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1s ease forwards;
         }
 
         .options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
+            margin-top: 20px;
+            animation: optionSlideIn 0.5s ease-out;
+        }
+
+        @keyframes optionSlideIn {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
 
         .option {
             background-color: #1976d2;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 14px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s ease;
-            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.3s ease;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .option.correct { background-color: #2e7d32; }
-        .option.incorrect { background-color: #c62828; }
-        .option.selected { pointer-events: none; }
+        .option.correct {
+            background-color: #2e7d32;
+            color: white;
+        }
 
-        .progress-bar {
-            height: 8px;
+        .option.incorrect {
+            background-color: #c62828;
+            color: white;
+        }
+
+        .option.selected {
+            pointer-events: none;
+        }
+
+        .progress-container {
+            margin-bottom: 20px;
             width: 100%;
+            height: 8px;
             background-color: #333;
             border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 20px;
         }
 
-        .progress-bar div {
+        .progress-bar {
             height: 100%;
             width: 0%;
             background-color: #66ccff;
+            border-radius: 5px;
             transition: width 0.4s ease;
         }
 
-        .quit-button {
-            background-color: #c62828;
+        .navigation-buttons button {
+            background-color: #0d47a1;
             color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: none;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s ease;
+        }
+
+        .navigation-buttons button:hover {
+            background-color: #1976d2;
+            transform: scale(1.05);
+        }
+
+        .quit-button {
             position: absolute;
             top: 15px;
             left: 15px;
+            background-color: #c62828;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        .quit-button:hover { background-color: #b71c1c; }
+        .quit-button:hover {
+            background-color: #b71c1c;
+        }
+
+        @media (max-width: 600px) {
+            .quiz-container, .result-container {
+                width: 90%;
+            }
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            animation: fadeInUp 1s ease-out;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            color: #FFF;
+        }
     </style>
 </head>
 <body>
+
     <h1>Anime Quiz</h1>
-    <div class="quiz-container">
-        <div class="progress-bar"><div id="progress"></div></div>
-        <div id="question-container"></div>
+
+    <div class="quiz-container" id="quiz-container">
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div id="questions-container"></div>
     </div>
-    <button class="quit-button" onclick="quitQuiz()">Quit</button>
+
+    <a class="quit-button" onclick="quitQuiz()">Quit Quiz</a>
+
+    <footer>
+        <p>Test your anime knowledge!</p>
+    </footer>
+
     <script>
-        const questions = [
-            { q: "Who is the main protagonist in *Naruto*?", o: ["Naruto Uzumaki", "Sasuke Uchiha", "Sakura Haruno", "Kakashi Hatake"], a: "Naruto Uzumaki" },
-            { q: "Which anime features 'I am going to be king of the pirates!'?", o: ["One Piece", "Bleach", "Attack on Titan", "Naruto"], a: "One Piece" },
-            { q: "Who is the main villain in *Dragon Ball Z*?", o: ["Frieza", "Cell", "Majin Buu", "Goku"], a: "Frieza" },
-            { q: "Which anime revolves around humanity's fight against giants?", o: ["Attack on Titan", "One Punch Man", "My Hero Academia", "Hunter x Hunter"], a: "Attack on Titan" },
-            { q: "What is the quirk of the protagonist in *My Hero Academia*?", o: ["All Might", "One For All", "Bakugo", "Todoroki"], a: "One For All" }
+        const allQuestions = [
+            { question: "Who is the main protagonist in *Naruto*?", options: ['Naruto Uzumaki', 'Sasuke Uchiha', 'Sakura Haruno', 'Kakashi Hatake'], answer: 'Naruto Uzumaki' },
+            { question: "Which anime features a character who says, 'I am going to be king of the pirates!'?", options: ['One Piece', 'Bleach', 'Attack on Titan', 'Naruto'], answer: 'One Piece' },
+            { question: "What is the name of the main villain in *Dragon Ball Z*?", options: ['Frieza', 'Cell', 'Majin Buu', 'Goku'], answer: 'Frieza' },
+            { question: "Which anime revolves around humanity's fight against giant humanoid creatures?", options: ['Attack on Titan', 'One Punch Man', 'My Hero Academia', 'Hunter x Hunter'], answer: 'Attack on Titan' },
+            { question: "What is the quirk of the protagonist in *My Hero Academia*?", options: ['All Might', 'One For All', 'Bakugo', 'Todoroki'], answer: 'One For All' }
         ];
 
-        let index = 0, correct = 0;
+        let currentQuestion = 0;
+        let correctAnswers = 0;
 
         function showQuestion() {
-            if (index >= questions.length) return finishQuiz();
-            const q = questions[index];
-            document.getElementById("question-container").innerHTML = `
-                <div class='question'>${q.q}</div>
-                <div class='options'>
-                    ${q.o.map(o => `<div class='option' onclick='checkAnswer(this, "${o}")'>${o}</div>`).join('')}
+            const question = allQuestions[currentQuestion];
+            const container = document.getElementById('questions-container');
+            container.innerHTML = `
+                <div class="question">
+                    <p>${question.question}</p>
+                    <div class="options">
+                        ${question.options.map((option, idx) => `
+                            <div class="option" onclick="selectAnswer('${option}', this)">
+                                ${String.fromCharCode(65 + idx)}. ${option}
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
             `;
-            document.getElementById("progress").style.width = `${(index / questions.length) * 100}%`;
+            updateProgressBar();
         }
 
-        function checkAnswer(element, answer) {
-            const correctAnswer = questions[index].a;
-            document.querySelectorAll('.option').forEach(opt => opt.classList.add('selected'));
-            if (answer === correctAnswer) {
+        function selectAnswer(selectedOption, element) {
+            const question = allQuestions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+
+            options.forEach(opt => opt.classList.add('selected'));
+
+            if (selectedOption === question.answer) {
                 element.classList.add('correct');
-                correct++;
+                correctAnswers++;
             } else {
                 element.classList.add('incorrect');
-                document.querySelectorAll('.option').forEach(opt => {
-                    if (opt.innerText === correctAnswer) opt.classList.add('correct');
+                options.forEach(opt => {
+                    if (opt.innerText.includes(question.answer)) {
+                        opt.classList.add('correct');
+                    }
                 });
             }
-            setTimeout(() => { index++; showQuestion(); }, 1500);
+            setTimeout(() => navigate(1), 2000); // Proceed to the next question after 2 seconds
+        }
+
+        function navigate(direction) {
+            currentQuestion += direction;
+            if (currentQuestion < allQuestions.length) {
+                showQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercentage = ((currentQuestion + 1) / allQuestions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
         }
 
         function finishQuiz() {
-            alert(`You got ${correct}/${questions.length} correct!`);
+            if (correctAnswers === allQuestions.length) {
+                alert(`marvellous,you are exceptional.congratulation! You scored ${correctAnswers} out of ${allQuestions.length}! 🎉`);
+            } else {
+                alert(`Quiz complete! You answered ${correctAnswers} out of ${allQuestions.length} correctly. try harder next time.`);
+            }
             location.href = "adse_movies_homepage.html";
         }
 
         function quitQuiz() {
-            if (confirm("Are you sure you want to quit?")) location.href = "adse_movies_homepage.html";
+            if (confirm("Are you sure you want to quit the quiz?")) {
+                location.href = "adse_movies_homepage.html";
+            }
         }
 
         showQuestion();
     </script>
+
 </body>
 </html>
+
+
